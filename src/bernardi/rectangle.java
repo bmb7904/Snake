@@ -11,14 +11,11 @@ package bernardi;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class rectangle extends JPanel {
 
@@ -65,61 +62,26 @@ public class rectangle extends JPanel {
         
         // imports images here
         // I should have tried to  make this code cleaner but it was too late and this works
+        // these images are taken from the resource file under the source packages
+        // this includes the images in the jar file
+        // DO NOT TOUCH UNLESS YOU ARE SURE WHAT YOU'RE DOING
+        // ALSO, DO NOT TOUCH THE RESOURCES FOLDER UNDER PROPERTIES
         try
         {
-            imageDown = ImageIO.read(new File("/Users/brettbernardi/Pictures/snakeHead3 (1).png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-        
-        try
-        {
-            imageLeft = ImageIO.read(new File("/Users/brettbernardi/Pictures/snakeHead3 (Left).png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-        
-        try
-        {
-            imageRight = ImageIO.read(new File("/Users/brettbernardi/Pictures/snakeHead3 (Right).png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-        
-        try
-        {
-            imageUp = ImageIO.read(new File("/Users/brettbernardi/Pictures/snakeHead3 (Up).png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-        try
-        {
-            imageBody = ImageIO.read(new File("/Users/brettbernardi/Pictures/bodySnake.png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-                try
-        {
-        imageApple = ImageIO.read(new File("/Users/brettbernardi/Pictures/apple.png"));
-        }
-        catch (IOException e)
-        {
-            
-        }
-        
-        
-        
+            imageDown = ImageIO.read(getClass().getResource("/snakeHead3 (1).png"));
+            imageLeft = ImageIO.read(getClass().getResource("/snakeHead3 (Left).png"));
+            imageRight = ImageIO.read(getClass().getResource("/snakeHead3 (Right).png"));
+            imageUp = ImageIO.read(getClass().getResource("/snakeHead3 (Up).png"));
+            imageBody = ImageIO.read(getClass().getResource("/bodySnake.png"));
+            imageApple = ImageIO.read(getClass().getResource("/apple.png"));
 
+        }
+        catch (IOException e)
+        {
+            
+        }
+        
+        //  this for loops goes through the incoming Array, cell by cell, and paints each with the imported images
         for (int i = 0; i < pixelHeightPanel; i = i + LsideSquare) 
         {
             for (int j = 0; j < pixelWidthPanel; j = j + LsideSquare) 
@@ -188,7 +150,12 @@ public class rectangle extends JPanel {
 
         }
         
+        
+        // this is unused code that draws lines between each cell in the array
+        // the game looks much better without it
+        
         /*
+        
         // the following code will draw the nice thick lines separating the blocks
         g2.setStroke(new BasicStroke(2));
         g2.setColor(Color.black);
@@ -201,6 +168,7 @@ public class rectangle extends JPanel {
         for (int l = 0; l < pixelHeightPanel; l = l + LsideSquare) {
             g2.drawLine(0, l, this.getWidth(), l);
         }
+        
         */
     
 

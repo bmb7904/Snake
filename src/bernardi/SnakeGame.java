@@ -3,10 +3,8 @@ package bernardi;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -17,23 +15,24 @@ public class SnakeGame
     // various variables describing size of grid and number of blocks in grid
     // the playing grid is a square
     // the fact that it's a square means that the number of columns and the number of rows are equal
-    // the grid is represented as a 2D array and I refer to the rows as i and the columns as j
-    // think of the i,j coordinates on the grid
-    final public static int numberOfColumnsAndRows = 22;
-    final public static int pixelWidth = 946;
-    final public static int pixelHeight = 946;
-    final public static int lengthSideOfSquare = pixelWidth/numberOfColumnsAndRows;
+    // the grid is represented as a 2D array and I refer to the rows as i and the columns as j throughout the  program
+    // think of an i,j coordinate system on the grid
+    final public static int NUMBEROFCOLUMNSANDROWS = 22;
+    final public static int PIXELWIDTH = 946;
+    final public static int PIXELHEIGHT = 946;
+    final public static int LENGTHSIDEOFSQUARE = PIXELWIDTH/NUMBEROFCOLUMNSANDROWS;
     
-    //greats objects for gameRules and Grid
-    // the gamerule class has the functions that move the snake
+    // objects for gameRules and Grid
+    // the gamerule class has the functions that move the snake and check collision
     // the grid class creates the arrays that update the grid with new snake 
-    public static Grid grid = new Grid(numberOfColumnsAndRows);
-    public static GameRules game = new GameRules(numberOfColumnsAndRows);
+    public static Grid grid = new Grid(NUMBEROFCOLUMNSANDROWS);
+    public static GameRules game = new GameRules(NUMBEROFCOLUMNSANDROWS);
     
     //This creates the global jFrame which is the frame onto which the grid will be drawn;
     public static JFrame mainWindow = new JFrame("The Return Of Snake              Programmer: Brett Bernardi");
     
     public static char userInputSnakeDirection;
+    
     
     
     
@@ -44,7 +43,7 @@ public class SnakeGame
     public static void createJframe()
     {
         mainWindow.setVisible(true);
-        mainWindow.setSize(pixelWidth, pixelHeight + 20);
+        mainWindow.setSize(PIXELWIDTH, PIXELHEIGHT + 20);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setLocation(900, 0);
         mainWindow.setAlwaysOnTop(true);
@@ -58,7 +57,7 @@ public class SnakeGame
     public static List<SnakeParts> createSnakeArray()
     {
         // creates the snake with each individual elements(heads and body parts)
-        // puts them into an array of objects of snakeParts
+        // puts them into an array List of objects of snakeParts
         // each object holds the snakeParts i and j positions as well as the order(1 == head, 2 + is a body)
         SnakeParts head = new SnakeParts(10,10,1);
         SnakeParts body1 = new SnakeParts(10,9,2);
@@ -92,9 +91,10 @@ public class SnakeGame
     }
     }
     
+    
     public static void updateRect(List <SnakeParts> snake, Fruit fruit, char direction)
     {
-      rectangle rect = new rectangle(pixelWidth, pixelHeight, lengthSideOfSquare,grid.addSnakeToGrid(snake, fruit, grid.createBlankGrid()), direction);
+      rectangle rect = new rectangle(PIXELWIDTH, PIXELHEIGHT, LENGTHSIDEOFSQUARE,grid.addSnakeToGrid(snake, fruit, grid.createBlankGrid()), direction);
       mainWindow.add(rect);
       mainWindow.setVisible(true);
     }
@@ -138,7 +138,7 @@ public class SnakeGame
         
     public static Fruit generateNewFruit(List <SnakeParts> snake)
     {
-        Fruit fruit = new Fruit(snake, numberOfColumnsAndRows);
+        Fruit fruit = new Fruit(snake, NUMBEROFCOLUMNSANDROWS);
         return fruit;
     }
     
@@ -170,15 +170,7 @@ public class SnakeGame
         int continueValue = 0;
         
         
-        while(continueValue != 1)
-        {
-            int score = 0;
-            
-            userInputSnakeDirection = 'R';
-        
-            List <SnakeParts> currentSnake = createSnakeArray();
-            Fruit fruit = generateNewFruit(currentSnake);
-            updateRect(currentSnake, fruit,userInputSnakeDirection);
+
 
             createJframe();
             KeyListener l;
@@ -201,6 +193,8 @@ public class SnakeGame
                        {
                            
                             userInputSnakeDirection = 'U';
+                            pause(10);
+                            
                        }
 
                    }
@@ -211,6 +205,7 @@ public class SnakeGame
                        {
                            
                             userInputSnakeDirection = 'D';
+                            pause(10);
                        }
                    }
 
@@ -218,7 +213,7 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'R')
                        {
-                           
+                            pause(10);
                             userInputSnakeDirection = 'L';
                        }
                    }     
@@ -227,7 +222,7 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'L')
                        {
-                           
+                           pause(10);
                            userInputSnakeDirection = 'R';
                        }
 
@@ -243,6 +238,17 @@ public class SnakeGame
             };
 
             mainWindow.addKeyListener(l);
+            
+    while(continueValue != 1)
+        
+    {
+            int score = 0;
+            
+            userInputSnakeDirection = 'R';
+        
+            List <SnakeParts> currentSnake = createSnakeArray();
+            Fruit fruit = generateNewFruit(currentSnake);
+            updateRect(currentSnake, fruit,userInputSnakeDirection);
 
             while(1==1)
             {
@@ -262,13 +268,13 @@ public class SnakeGame
                         updateRect(newSnake, fruit,userInputSnakeDirection);
                         // updates currentSnake to  newSnake
                         currentSnake = newSnake;
-                        pause(130);
+                        pause(115);
                     }
 
                     else
                     {
                         updateRect(newSnake, fruit,userInputSnakeDirection);
-                        pause(130);
+                        pause(115);
                     }
 
 

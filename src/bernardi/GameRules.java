@@ -134,7 +134,7 @@ public class GameRules
             
             // boolean is false if no collision is detected
             boolean collision = false;
-            for(int i = 2; i < currentSnake.size(); i ++)
+            for(int i = 1; i < currentSnake.size(); i ++)
             {
                 if(newSnake.get(0).icomp == currentSnake.get(i).icomp && newSnake.get(0).jcomp == currentSnake.get(i).jcomp)
                 {
