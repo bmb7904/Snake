@@ -53,7 +53,7 @@ public class Fruit
         
         else if(randomNum > 6)
         {
-            // orange
+            // grapes
             ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 3;
         }
         

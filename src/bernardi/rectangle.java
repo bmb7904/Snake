@@ -96,6 +96,7 @@ public class rectangle extends JPanel {
         {
             for (int j = 0; j < pixelWidthPanel; j = j + LsideSquare) 
             {
+                // if number in array == 1, which is the head
                 if (maze[i / LsideSquare][j / LsideSquare] == SNAKEHEADARRAYVALUE) 
                 {
                     //myPen.setColor(Color.LIGHT_GRAY);
@@ -133,6 +134,7 @@ public class rectangle extends JPanel {
 
 
                 } 
+                // IF APPLE
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 1) )) 
                 {
                     //myPen.setColor(Color.lightGray);
@@ -140,7 +142,7 @@ public class rectangle extends JPanel {
                     
                     myPen.drawImage(imageApple, j, i,LsideSquare - 5,LsideSquare, this);
                 } 
-                
+                // IF BANANNA
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 2) ))
                 {
                     //myPen.setColor(Color.LIGHT_GRAY);
@@ -148,7 +150,7 @@ public class rectangle extends JPanel {
                     
                     myPen.drawImage(imageBananna, j, i,LsideSquare,LsideSquare, this);
                 }
-                
+                // IF GRAPES
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 3) ))
                 {
                     //myPen.setColor(Color.LIGHT_GRAY);
@@ -157,7 +159,7 @@ public class rectangle extends JPanel {
                     myPen.drawImage(imageGrapes, j, i, LsideSquare + 2, LsideSquare  , this);
                 }
                 
-                /*
+                /* NOT  IN USE ANYMORE
                 else if (maze[i / LsideSquare][j / LsideSquare] == 0) 
                 {
                     myPen.setColor(Color.LIGHT_GRAY);
@@ -171,6 +173,8 @@ public class rectangle extends JPanel {
                     //Color c = new Color();
                     //myPen.setColor(Color.red);
                     //myPen.setColor(Color.getHSBColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
+                    
+                    
                     myPen.drawImage(imageBody, j, i, this);
                 }
 

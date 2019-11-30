@@ -21,7 +21,7 @@ public class Grid
     
     public int[][] addSnakeToGrid(List <SnakeParts> snake, Fruit fruit)
     {
-        // the outgoing grid will start with blankGrid attribute and then add snake and fruit and return it
+        // the outgoing grid will start with blankGrid and then add snake and fruit and return it
         int[][] outgoingGrid = createBlankGrid(rows,columns);
         
         for(int i = 0; i < snake.size(); i ++)
@@ -37,11 +37,6 @@ public class Grid
 
     }
     
-        
-    // this is only called once when the contructor for the grid class is called
-    // this creates a blank grid and stores it as attribute for the object grid
-    // this reduces computational resources as the program doesn't have to compute a new blank grid
-    // everytime the addToSnakeGrid function is called 
     private static int[][] createBlankGrid(int numberOfRows, int numberOfColumns)
    {
        int[][] tempBlankGrid = new int[numberOfRows][numberOfColumns];

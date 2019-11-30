@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
 public class SnakeGame 
 {
     
-    Dimension screenSize  =  Toolkit.getDefaultToolkit().getScreenSize();
+    public static Dimension screenSize  =  Toolkit.getDefaultToolkit().getScreenSize();
     
-    double screenWidth = screenSize.width;
-    double screenHeight = screenSize.height;
+    static double screenWidth = screenSize.width;
+    static double screenHeight = screenSize.height;
     
     // global variables
     // various variables describing size of grid and number of blocks in grid
@@ -25,9 +25,10 @@ public class SnakeGame
     // the grid is represented as a 2D array and I refer to the rows as i and the columns as j throughout the  program
     // think of an i,j coordinate system on the grid
     final public static int NUMBEROFCOLUMNSANDROWS = 22;
-    final public static int PIXELWIDTH = 946;
-    final public static int PIXELHEIGHT = 946;
-    final public static int LENGTHSIDEOFSQUARE = PIXELWIDTH/NUMBEROFCOLUMNSANDROWS;
+    final public static int LENGTHSIDEOFSQUARE = ((int)screenHeight/NUMBEROFCOLUMNSANDROWS)- 6;
+    final public static int PIXELWIDTH = LENGTHSIDEOFSQUARE * NUMBEROFCOLUMNSANDROWS;
+    final public static int PIXELHEIGHT = LENGTHSIDEOFSQUARE * NUMBEROFCOLUMNSANDROWS;
+    
     
     // objects for gameRules and Grid
 
@@ -169,6 +170,7 @@ public class SnakeGame
     {
         int continueValue = 0;
         
+        System.out.println(PIXELHEIGHT);
         
 
 
