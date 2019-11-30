@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 
 public class rectangle extends JPanel {
 
+    Images im = new Images();
+    
     public static BufferedImage imageDown;
     public static BufferedImage imageLeft;
     public static BufferedImage imageRight;
@@ -26,9 +28,9 @@ public class rectangle extends JPanel {
     public static BufferedImage imageBody;
     public static BufferedImage imageApple;
     public static BufferedImage imageBananna;
-    public static BufferedImage imageOrange;
     public static BufferedImage imageGrapes;
-    public static BufferedImage background;
+    public static BufferedImage imageStrawberry;
+    public BufferedImage background;
     
     public int pixelWidthPanel;
     public int pixelHeightPanel;
@@ -44,16 +46,17 @@ public class rectangle extends JPanel {
     // constructor for Rectangle class
     // will take in and set size of rectangle (square) as well as coordinate 
     // where the rectangle will be drawn
-    public rectangle(int pixelWidth, int pixelHeight, int lengthSideSquare, int[][] maze, char direction) {
+    public rectangle(int pixelWidth, int pixelHeight, int lengthSideSquare, int[][] maze, char direction, BufferedImage background) {
         this.LsideSquare = lengthSideSquare;
         this.pixelHeightPanel = pixelHeight;
         this.pixelWidthPanel = pixelWidth;
         this.maze = maze;
         this.direction = direction;
+        this.background = background;
     }
 
     // this is not a user defined function, but a function that comes with the
-    // imports. This will draw a rectangle and associate it with the new object 
+    // JPanel class. This will draw a rectangle and associate it with the new object 
     // when created. No need to call this function seperately. This gave me a lot of 
     //  headaches trying to figure out!!!
     public void paintComponent(Graphics myPen) 
@@ -70,24 +73,7 @@ public class rectangle extends JPanel {
         // this includes the images in the jar file
         // DO NOT TOUCH UNLESS YOU ARE SURE WHAT YOU'RE DOING
         // ALSO, DO NOT TOUCH THE RESOURCES FOLDER UNDER PROPERTIES
-        try
-        {
-            imageDown = ImageIO.read(getClass().getResource("/snakeHead3 (1).png"));
-            imageLeft = ImageIO.read(getClass().getResource("/snakeHead3 (Left).png"));
-            imageRight = ImageIO.read(getClass().getResource("/snakeHead3 (Right).png"));
-            imageUp = ImageIO.read(getClass().getResource("/snakeHead3 (Up).png"));
-            imageBody = ImageIO.read(getClass().getResource("/bodySnake.png"));
-            imageApple = ImageIO.read(getClass().getResource("/newApple.png"));
-            imageBananna = ImageIO.read(getClass().getResource("/bananna.png"));
-            imageOrange = ImageIO.read(getClass().getResource("/orange.png"));
-            imageGrapes = ImageIO.read(getClass().getResource("/grapes.png"));
-            background = ImageIO.read(getClass().getResource("/background.png"));
 
-        }
-        catch (IOException e)
-        {
-            
-        }
         
         myPen.drawImage(background, 0, 0, pixelWidthPanel, pixelHeightPanel, this);
         
@@ -107,21 +93,65 @@ public class rectangle extends JPanel {
                         
                         case'D':
                         {
+                            try
+                               {
+                                   imageDown = ImageIO.read(getClass().getResource("/snakeHead3 (1).png"));
+
+                               }
+                            catch (IOException e)
+                               {
+
+                               }
+
+                            
                            myPen.drawImage(imageDown, j, i, this);
                            break;
                         }
                         case 'L': 
                         {
+                            try
+                               {
+                                   imageLeft = ImageIO.read(getClass().getResource("/snakeHead3 (Left).png"));
+
+                               }
+                            catch (IOException e)
+                               {
+
+                               }
+
+                            
                             myPen.drawImage(imageLeft, j, i,  this);
                             break;
                         }
                         case 'R':
                         {
+                             try
+                               {
+                                   imageRight = ImageIO.read(getClass().getResource("/snakeHead3 (Right).png"));
+
+                               }
+                             catch (IOException e)
+                               {
+
+                               }
+
+                            
                             myPen.drawImage(imageRight, j, i, this);
                             break;
                         }
                         case 'U':
                         {
+                             try
+                               {
+                                    imageUp = ImageIO.read(getClass().getResource("/snakeHead3 (Up).png"));
+
+                               }
+                             catch (IOException e)
+                               {
+
+                               }
+
+                            
                             myPen.drawImage(imageUp, j, i, this);
                             break;
                         }
@@ -134,38 +164,88 @@ public class rectangle extends JPanel {
 
 
                 } 
+                
                 // IF APPLE
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 1) )) 
                 {
-                    //myPen.setColor(Color.lightGray);
-                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    try
+                        {
+                            imageApple = ImageIO.read(getClass().getResource("/newApple.png"));
+                    
+                        }
+                    catch (IOException e)
+                        {
+
+                        }
+
                     
                     myPen.drawImage(imageApple, j, i,LsideSquare - 5,LsideSquare, this);
                 } 
+                
                 // IF BANANNA
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 2) ))
                 {
-                    //myPen.setColor(Color.LIGHT_GRAY);
-                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    try
+                        {
+                            imageBananna = ImageIO.read(getClass().getResource("/bananna.png"));
+                    
+                        }
+                    catch (IOException e)
+                        {
+
+                        }
+                    
                     
                     myPen.drawImage(imageBananna, j, i,LsideSquare,LsideSquare, this);
                 }
+                
                 // IF GRAPES
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 3) ))
                 {
-                    //myPen.setColor(Color.LIGHT_GRAY);
-                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    try
+                        {
+                            imageGrapes = ImageIO.read(getClass().getResource("/grapes.png"));
                     
-                    myPen.drawImage(imageGrapes, j, i, LsideSquare + 2, LsideSquare  , this);
+                        }
+                    catch (IOException e)
+                        {
+
+                        }
+                        
+                    
+                    
+                    myPen.drawImage(imageGrapes, j, i, LsideSquare + 3, LsideSquare , this);
                 }
                 
-                /* NOT  IN USE ANYMORE
+                // IF strawberry
+                else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 4) ))
+                {
+                    try
+                        {
+                            imageStrawberry = ImageIO.read(getClass().getResource("/strawberry.png"));
+                    
+                        }
+                    catch (IOException e)
+                        {
+
+                        }
+                    
+                    myPen.drawImage(imageStrawberry, j, i - 2, (int)(1.2 * LsideSquare), (int)(1.2 * LsideSquare), this);
+                    
+                    
+                }
+                
+                /* NOT  IN USE ANYMORE since we added a background image
+                -- i am keeping it for reference
                 else if (maze[i / LsideSquare][j / LsideSquare] == 0) 
                 {
                     myPen.setColor(Color.LIGHT_GRAY);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                 } 
                 */
+                
+                // by the time the programs get to this point, all that remains
+                // should be the body parts
                 else if(maze[i / LsideSquare][j / LsideSquare] > 1 )
                 {
                     //myPen.setColor(Color.LIGHT_GRAY);
@@ -174,8 +254,24 @@ public class rectangle extends JPanel {
                     //myPen.setColor(Color.red);
                     //myPen.setColor(Color.getHSBColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
                     
+                    try
+                        {
+                            imageBody = ImageIO.read(getClass().getResource("/bodySnake.png"));
+                    
+                        }
+                    
+                    catch (IOException e)
+                        {
+
+                        }
+                        
                     
                     myPen.drawImage(imageBody, j, i, this);
+                }
+                
+                else
+                {
+                    
                 }
 
                 
@@ -186,6 +282,7 @@ public class rectangle extends JPanel {
         
         // this is unused code that draws lines between each cell in the array
         // the game looks much better without it
+        //-- i am keeping it for reference
         
         /*
         

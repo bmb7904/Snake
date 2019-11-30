@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -42,6 +43,15 @@ public class SnakeGame
     public static JFrame mainWindow = new JFrame("The Return Of Snake              Programmer: Brett Bernardi");
     
     public static char userInputSnakeDirection;
+    
+    // reads in background image separately in order to not have to keep doing it repeatedly 
+    // every time a new rectangle is drawn
+    // I suspect this will save computational/memory resources
+    // This solution is not optimal but it's the best I can come up this late into the project
+    public static Images im = new Images();
+    public static BufferedImage background = im.returnBackgroundImage();
+    
+    
     
     
     
@@ -104,7 +114,7 @@ public class SnakeGame
     
     public static void updateRect(List <SnakeParts> snake, Fruit fruit, char direction)
     {
-      rectangle rect = new rectangle(PIXELWIDTH, PIXELHEIGHT, LENGTHSIDEOFSQUARE,grid.addSnakeToGrid(snake, fruit), direction);
+      rectangle rect = new rectangle(PIXELWIDTH, PIXELHEIGHT, LENGTHSIDEOFSQUARE,grid.addSnakeToGrid(snake, fruit), direction, background);
       mainWindow.add(rect);
       mainWindow.setVisible(true);
     }
@@ -273,6 +283,11 @@ public class SnakeGame
                         else if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 3)
                         {
                             score += 300;
+                        }
+                        
+                        else
+                        {
+                            score += 500;
                         }
                         
                         

@@ -43,9 +43,17 @@ public class Fruit
         
         
         
-        int randomNum = (int)(Math.random() * 10) + 1;
+        int randomNum = (int)(Math.random() * 11) + 1;
         
-        if(randomNum > 9)
+        // smallest chance of occuring
+        // worth most points
+        if(randomNum == 6)
+        {
+            //pineapple
+            ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 4;
+        }
+        
+        else if(randomNum > 9)
         {
             // bananna
             ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 2;
@@ -56,6 +64,8 @@ public class Fruit
             // grapes
             ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 3;
         }
+        
+        
         
         else
         {
