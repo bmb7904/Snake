@@ -230,7 +230,7 @@ public class rectangle extends JPanel {
 
                         }
                     
-                    myPen.drawImage(imageStrawberry, j, i - 2, (int)(1.2 * LsideSquare), (int)(1.2 * LsideSquare), this);
+                    myPen.drawImage(imageStrawberry, j, i - 4, (int)(1.2 * LsideSquare), (int)(1.2 * LsideSquare), this);
                     
                     
                 }

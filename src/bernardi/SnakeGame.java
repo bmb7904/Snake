@@ -51,6 +51,8 @@ public class SnakeGame
     public static Images im = new Images();
     public static BufferedImage background = im.returnBackgroundImage();
     
+    public static Sounds sounds = new Sounds();
+    
     
     
     
@@ -270,6 +272,9 @@ public class SnakeGame
                     // if snake hits fruit
                     if(checkIfHitFruit(newSnake, fruit))
                     {
+                        // plays the eating sounds
+                        sounds.soundEating();
+                        
                         if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 1)
                         {
                             score += 100;
@@ -317,6 +322,9 @@ public class SnakeGame
                 //  if snake collides with itself -- game over. break out
                 else 
                 {
+                    sounds.crash1();
+                    pause(850);
+                    sounds.gameOver();
                     updateRect(newSnake, fruit,userInputSnakeDirection);
                     break;
                 }
