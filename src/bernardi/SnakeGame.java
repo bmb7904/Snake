@@ -1,5 +1,7 @@
 package bernardi;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -10,6 +12,11 @@ import javax.swing.JOptionPane;
 
 public class SnakeGame 
 {
+    
+    Dimension screenSize  =  Toolkit.getDefaultToolkit().getScreenSize();
+    
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     
     // global variables
     // various variables describing size of grid and number of blocks in grid
@@ -23,9 +30,11 @@ public class SnakeGame
     final public static int LENGTHSIDEOFSQUARE = PIXELWIDTH/NUMBEROFCOLUMNSANDROWS;
     
     // objects for gameRules and Grid
-    // the gamerule class has the functions that move the snake and check collision
+
     // the grid class creates the arrays that update the grid with new snake 
     public static Grid grid = new Grid(NUMBEROFCOLUMNSANDROWS);
+    
+    // the gamerule class has the functions that move the snake and check collision with itself or fruit
     public static GameRules game = new GameRules(NUMBEROFCOLUMNSANDROWS);
     
     //This creates the global jFrame which is the frame onto which the grid will be drawn;
@@ -43,9 +52,9 @@ public class SnakeGame
     public static void createJframe()
     {
         mainWindow.setVisible(true);
-        mainWindow.setSize(PIXELWIDTH, PIXELHEIGHT + 20);
+        mainWindow.setSize(PIXELWIDTH, PIXELHEIGHT + 22);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setLocation(900, 0);
+        mainWindow.setLocation(0, 0);
         mainWindow.setAlwaysOnTop(true);
         mainWindow.setResizable(true);
         //JLabel myLabel = new JLabel();
@@ -94,7 +103,7 @@ public class SnakeGame
     
     public static void updateRect(List <SnakeParts> snake, Fruit fruit, char direction)
     {
-      rectangle rect = new rectangle(PIXELWIDTH, PIXELHEIGHT, LENGTHSIDEOFSQUARE,grid.addSnakeToGrid(snake, fruit, grid.createBlankGrid()), direction);
+      rectangle rect = new rectangle(PIXELWIDTH, PIXELHEIGHT, LENGTHSIDEOFSQUARE,grid.addSnakeToGrid(snake, fruit), direction);
       mainWindow.add(rect);
       mainWindow.setVisible(true);
     }
@@ -142,26 +151,17 @@ public class SnakeGame
         return fruit;
     }
     
-    public static List <SnakeParts> addToSnake(List <SnakeParts> snake)
+    // creates new body parts and returns it. 
+    // the new body part is created and based on the location of the final body part (tail) of the snake that is inputed into function
+    // uses function from the gameRules class
+    public static SnakeParts getTailSection(List <SnakeParts> snake)
     {
-        int sizeOldSnake = snake.size();
-        List <SnakeParts> newSnake = new ArrayList<SnakeParts>();
-        for(int i = 0; i<snake.size(); i++)
-        {
-            newSnake.add(i, snake.get(i));
-        }
-        
-        if((snake.get(sizeOldSnake - 1).jcomp) != 0)
-        {
-            newSnake.add(snake.size(), new SnakeParts(snake.get(sizeOldSnake - 1).icomp, snake.get(sizeOldSnake - 1).jcomp - 1, snake.get(sizeOldSnake - 1).order + 1));
-        }
-        
-        else if (snake.get(sizeOldSnake - 1).icomp != 0)
-        {
-            newSnake.add(snake.size(), new SnakeParts(snake.get(sizeOldSnake - 1).icomp - 1, snake.get(sizeOldSnake - 1).jcomp , snake.get(sizeOldSnake - 1).order + 1));
-        }
-        
-        return newSnake;
+        return game.getFinalBodyPart(snake);
+    }
+    
+    public static List <SnakeParts> addToSnake(List <SnakeParts> snake, SnakeParts tail)
+    {
+        return game.addNewBodyPart(snake, tail);
     }
 
    
@@ -191,10 +191,7 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'D')
                        {
-                           
-                            userInputSnakeDirection = 'U';
-                            pause(10);
-                            
+                           userInputSnakeDirection = 'U';      
                        }
 
                    }
@@ -203,9 +200,7 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'U')
                        {
-                           
-                            userInputSnakeDirection = 'D';
-                            pause(10);
+                           userInputSnakeDirection = 'D';
                        }
                    }
 
@@ -213,7 +208,6 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'R')
                        {
-                            pause(10);
                             userInputSnakeDirection = 'L';
                        }
                    }     
@@ -222,7 +216,6 @@ public class SnakeGame
                    {
                        if(userInputSnakeDirection != 'L')
                        {
-                           pause(10);
                            userInputSnakeDirection = 'R';
                        }
 
@@ -238,7 +231,8 @@ public class SnakeGame
             };
 
             mainWindow.addKeyListener(l);
-            
+         
+    // loop to start new games        
     while(continueValue != 1)
         
     {
@@ -249,9 +243,12 @@ public class SnakeGame
             List <SnakeParts> currentSnake = createSnakeArray();
             Fruit fruit = generateNewFruit(currentSnake);
             updateRect(currentSnake, fruit,userInputSnakeDirection);
-
+            
+            // main game loop
             while(1==1)
             {
+                // new snake is the snake that is moved depending upon the direction
+                // this newSnake is compared against currentSnake to check for collision with itself or fruit
                 List <SnakeParts> newSnake = moveSnake(currentSnake, userInputSnakeDirection);
 
                 if((checkIfSnakeCollides(currentSnake, newSnake)) == false)
@@ -259,15 +256,36 @@ public class SnakeGame
                     // if snake hits fruit
                     if(checkIfHitFruit(newSnake, fruit))
                     {
-                        score += 100;
-                        // add block to tail of snake
-                        newSnake = addToSnake(newSnake);
+                        if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 1)
+                        {
+                            score += 100;
+                        }
+                        
+                        else if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 2)
+                        {
+                            score += 200;
+                        }
+                        
+                        else if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 3)
+                        {
+                            score += 300;
+                        }
+                        
+                        
+                        
+                        // creates tail section based on current snake's tail 
+                        // then adds the new tail to newSnake
+                        newSnake = addToSnake(newSnake, getTailSection(currentSnake));
+
                         // generate new fruit and new location of fruit
                         fruit = generateNewFruit(newSnake);
+                        
                         // draw newly updated snake and fruit on grid
                         updateRect(newSnake, fruit,userInputSnakeDirection);
+                        
                         // updates currentSnake to  newSnake
                         currentSnake = newSnake;
+                        
                         pause(115);
                     }
 
@@ -280,6 +298,7 @@ public class SnakeGame
 
                 }
 
+                //  if snake collides with itself -- game over. break out
                 else 
                 {
                     updateRect(newSnake, fruit,userInputSnakeDirection);

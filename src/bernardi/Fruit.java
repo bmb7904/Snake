@@ -10,6 +10,7 @@ public class Fruit
     public int icompFruit;
     public int jcompFruit;
     public int ORDER;
+    public int fruitValue;
     
     // constructor that creates the fruit object
     // creates the fruit location (icomp and jcomp) randomly
@@ -40,7 +41,27 @@ public class Fruit
             }
         } while(loopVar == true);
         
-        ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 1;
+        
+        
+        int randomNum = (int)(Math.random() * 10) + 1;
+        
+        if(randomNum > 9)
+        {
+            // bananna
+            ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 2;
+        }
+        
+        else if(randomNum > 6)
+        {
+            // orange
+            ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 3;
+        }
+        
+        else
+        {
+            // apple
+            ORDER = (numberOfColumnsAndRows * numberOfColumnsAndRows) + 1;
+        }
         
     }
 }

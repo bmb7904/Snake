@@ -25,6 +25,9 @@ public class rectangle extends JPanel {
     public static BufferedImage imageUp;
     public static BufferedImage imageBody;
     public static BufferedImage imageApple;
+    public static BufferedImage imageBananna;
+    public static BufferedImage imageOrange;
+    public static BufferedImage imageGrapes;
     
     public int pixelWidthPanel;
     public int pixelHeightPanel;
@@ -73,7 +76,10 @@ public class rectangle extends JPanel {
             imageRight = ImageIO.read(getClass().getResource("/snakeHead3 (Right).png"));
             imageUp = ImageIO.read(getClass().getResource("/snakeHead3 (Up).png"));
             imageBody = ImageIO.read(getClass().getResource("/bodySnake.png"));
-            imageApple = ImageIO.read(getClass().getResource("/apple.png"));
+            imageApple = ImageIO.read(getClass().getResource("/newApple.png"));
+            imageBananna = ImageIO.read(getClass().getResource("/bananna.png"));
+            imageOrange = ImageIO.read(getClass().getResource("/orange.png"));
+            imageGrapes = ImageIO.read(getClass().getResource("/grapes.png"));
 
         }
         catch (IOException e)
@@ -88,7 +94,7 @@ public class rectangle extends JPanel {
             {
                 if (maze[i / LsideSquare][j / LsideSquare] == SNAKEHEADARRAYVALUE) 
                 {
-                    myPen.setColor(Color.white);
+                    myPen.setColor(Color.LIGHT_GRAY);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
                     switch(direction)
@@ -101,7 +107,7 @@ public class rectangle extends JPanel {
                         }
                         case 'L': 
                         {
-                            myPen.drawImage(imageLeft, j, i, this);
+                            myPen.drawImage(imageLeft, j, i,  this);
                             break;
                         }
                         case 'R':
@@ -125,19 +131,36 @@ public class rectangle extends JPanel {
                 } 
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 1) )) 
                 {
-                    myPen.setColor(Color.white);
+                    myPen.setColor(Color.lightGray);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
-                    myPen.drawImage(imageApple, j, i, this);
+                    myPen.drawImage(imageApple, j, i,LsideSquare - 5,LsideSquare, this);
                 } 
+                
+                else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 2) ))
+                {
+                    myPen.setColor(Color.LIGHT_GRAY);
+                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    
+                    myPen.drawImage(imageBananna, j, i,LsideSquare,LsideSquare, this);
+                }
+                
+                else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 3) ))
+                {
+                    myPen.setColor(Color.LIGHT_GRAY);
+                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    
+                    myPen.drawImage(imageGrapes, j, i, LsideSquare + 2, LsideSquare  , this);
+                }
+                
                 else if (maze[i / LsideSquare][j / LsideSquare] == 0) 
                 {
-                    myPen.setColor(Color.white);
+                    myPen.setColor(Color.LIGHT_GRAY);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                 } 
                 else 
                 {
-                    myPen.setColor(Color.white);
+                    myPen.setColor(Color.LIGHT_GRAY);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     //Color c = new Color();
                     //myPen.setColor(Color.red);

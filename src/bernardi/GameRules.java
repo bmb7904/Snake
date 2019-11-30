@@ -157,4 +157,16 @@ public class GameRules
         }
         }
         
+        public List <SnakeParts> addNewBodyPart(List <SnakeParts> incomingSnake, SnakeParts tail)
+        {
+            incomingSnake.add(incomingSnake.size(), tail);
+            return incomingSnake;
+        }
+        
+        public SnakeParts getFinalBodyPart(List <SnakeParts> snake)
+        {
+            SnakeParts tail = new SnakeParts(snake.get(snake.size() - 1).getSnakePartsIcomp(),snake.get(snake.size() - 1).getSnakePartsJcomp(), snake.get(snake.size() - 1).getSnakePartsOrder() + 1);
+            return tail;
+        }
+        
 }

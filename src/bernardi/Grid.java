@@ -6,45 +6,53 @@ import java.util.List;
 
 public class Grid 
 {
-        final public int numberOfRows;
-        final public int numberOfColumns;
-        public int[][] tempGrid;
+        final public int rows;
+        final public int columns;
+
         
         
     public Grid(int numberOfColumnsAndRows)
     {
-        this.numberOfColumns = numberOfColumnsAndRows;
-        this.numberOfRows = numberOfColumnsAndRows;
-        tempGrid = new int[numberOfRows][numberOfColumns];
+        this.rows = numberOfColumnsAndRows;
+        this.columns = numberOfColumnsAndRows;
+        
+        
     }
     
-    public int[][] addSnakeToGrid(List <SnakeParts> snake, Fruit fruit, int[][] incomingGrid )
+    public int[][] addSnakeToGrid(List <SnakeParts> snake, Fruit fruit)
     {
+        // the outgoing grid will start with blankGrid attribute and then add snake and fruit and return it
+        int[][] outgoingGrid = createBlankGrid(rows,columns);
         
         for(int i = 0; i < snake.size(); i ++)
         {
             // this sets the grid to each component in the snake
-            incomingGrid[snake.get(i).icomp][snake.get(i).jcomp] = snake.get(i).order;
+            outgoingGrid[snake.get(i).icomp][snake.get(i).jcomp] = snake.get(i).order;
         }
         
-        incomingGrid[fruit.icompFruit][fruit.jcompFruit] = fruit.ORDER;
+        outgoingGrid[fruit.icompFruit][fruit.jcompFruit] = fruit.ORDER;
         
         
-        return incomingGrid;
+        return outgoingGrid;
 
     }
     
         
-    public int[][] createBlankGrid()
+    // this is only called once when the contructor for the grid class is called
+    // this creates a blank grid and stores it as attribute for the object grid
+    // this reduces computational resources as the program doesn't have to compute a new blank grid
+    // everytime the addToSnakeGrid function is called 
+    private static int[][] createBlankGrid(int numberOfRows, int numberOfColumns)
    {
+       int[][] tempBlankGrid = new int[numberOfRows][numberOfColumns];
        for(int i = 0; i < numberOfRows; i ++)
        {
            for (int j = 0; j < numberOfColumns; j++)
            {
-               tempGrid[i][j] = 0;
+               tempBlankGrid[i][j] = 0;
            }
        }
        
-       return tempGrid;
+       return tempBlankGrid;
    }
 }
