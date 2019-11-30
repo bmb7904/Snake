@@ -28,6 +28,7 @@ public class rectangle extends JPanel {
     public static BufferedImage imageBananna;
     public static BufferedImage imageOrange;
     public static BufferedImage imageGrapes;
+    public static BufferedImage background;
     
     public int pixelWidthPanel;
     public int pixelHeightPanel;
@@ -80,12 +81,15 @@ public class rectangle extends JPanel {
             imageBananna = ImageIO.read(getClass().getResource("/bananna.png"));
             imageOrange = ImageIO.read(getClass().getResource("/orange.png"));
             imageGrapes = ImageIO.read(getClass().getResource("/grapes.png"));
+            background = ImageIO.read(getClass().getResource("/background.png"));
 
         }
         catch (IOException e)
         {
             
         }
+        
+        myPen.drawImage(background, 0, 0, pixelWidthPanel, pixelHeightPanel, this);
         
         //  this for loops goes through the incoming Array, cell by cell, and paints each with the imported images
         for (int i = 0; i < pixelHeightPanel; i = i + LsideSquare) 
@@ -94,8 +98,8 @@ public class rectangle extends JPanel {
             {
                 if (maze[i / LsideSquare][j / LsideSquare] == SNAKEHEADARRAYVALUE) 
                 {
-                    myPen.setColor(Color.LIGHT_GRAY);
-                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    //myPen.setColor(Color.LIGHT_GRAY);
+                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
                     switch(direction)
                     {
@@ -131,37 +135,39 @@ public class rectangle extends JPanel {
                 } 
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 1) )) 
                 {
-                    myPen.setColor(Color.lightGray);
-                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    //myPen.setColor(Color.lightGray);
+                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
                     myPen.drawImage(imageApple, j, i,LsideSquare - 5,LsideSquare, this);
                 } 
                 
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 2) ))
                 {
-                    myPen.setColor(Color.LIGHT_GRAY);
-                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    //myPen.setColor(Color.LIGHT_GRAY);
+                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
                     myPen.drawImage(imageBananna, j, i,LsideSquare,LsideSquare, this);
                 }
                 
                 else if (maze[i / LsideSquare][j / LsideSquare] == ((Math.pow((pixelWidthPanel/LsideSquare), 2) + 3) ))
                 {
-                    myPen.setColor(Color.LIGHT_GRAY);
-                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    //myPen.setColor(Color.LIGHT_GRAY);
+                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     
                     myPen.drawImage(imageGrapes, j, i, LsideSquare + 2, LsideSquare  , this);
                 }
                 
+                /*
                 else if (maze[i / LsideSquare][j / LsideSquare] == 0) 
                 {
                     myPen.setColor(Color.LIGHT_GRAY);
                     myPen.fillRect(j, i, LsideSquare, LsideSquare);
                 } 
-                else 
+                */
+                else if(maze[i / LsideSquare][j / LsideSquare] > 1 )
                 {
-                    myPen.setColor(Color.LIGHT_GRAY);
-                    myPen.fillRect(j, i, LsideSquare, LsideSquare);
+                    //myPen.setColor(Color.LIGHT_GRAY);
+                    //myPen.fillRect(j, i, LsideSquare, LsideSquare);
                     //Color c = new Color();
                     //myPen.setColor(Color.red);
                     //myPen.setColor(Color.getHSBColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));

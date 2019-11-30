@@ -247,6 +247,8 @@ public class SnakeGame
             // main game loop
             while(1==1)
             {
+                pause(115);
+                
                 // new snake is the snake that is moved depending upon the direction
                 // this newSnake is compared against currentSnake to check for collision with itself or fruit
                 List <SnakeParts> newSnake = moveSnake(currentSnake, userInputSnakeDirection);
@@ -285,14 +287,11 @@ public class SnakeGame
                         
                         // updates currentSnake to  newSnake
                         currentSnake = newSnake;
-                        
-                        pause(115);
                     }
 
                     else
                     {
                         updateRect(newSnake, fruit,userInputSnakeDirection);
-                        pause(115);
                     }
 
 
