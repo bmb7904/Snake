@@ -323,9 +323,10 @@ public class SnakeGame
                 else 
                 {
                     sounds.crash1();
-                    pause(850);
-                    sounds.gameOver();
                     updateRect(newSnake, fruit,userInputSnakeDirection);
+                    pause(800);
+                    sounds.gameOver();
+                    
                     break;
                 }
 
