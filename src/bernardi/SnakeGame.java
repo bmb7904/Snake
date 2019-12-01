@@ -53,14 +53,7 @@ public class SnakeGame
     
     public static Sounds sounds = new Sounds();
     
-    
-    
-    
-    
-    
-    
-
-    
+   
     
     public static void createJframe()
     {
