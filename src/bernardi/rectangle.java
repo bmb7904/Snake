@@ -8,7 +8,6 @@
 
 package bernardi;
 
-import java.awt.Graphics2D;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -19,8 +18,7 @@ import javax.imageio.ImageIO;
 
 public class rectangle extends JPanel {
 
-    Images im = new Images();
-    
+
     public static BufferedImage imageDown;
     public static BufferedImage imageLeft;
     public static BufferedImage imageRight;
@@ -64,17 +62,7 @@ public class rectangle extends JPanel {
         // still not exactly sure what this does but it is needed
         super.paintComponent(myPen);
         // sets pen to new graphics 2d for added features
-        Graphics2D g2 = (Graphics2D) myPen;
-        // sets color used by pen to draw
-        
-        // imports images here
-        // I should have tried to  make this code cleaner but it was too late and this works
-        // these images are taken from the resource file under the source packages
-        // this includes the images in the jar file
-        // DO NOT TOUCH UNLESS YOU ARE SURE WHAT YOU'RE DOING
-        // ALSO, DO NOT TOUCH THE RESOURCES FOLDER UNDER PROPERTIES
 
-        
         myPen.drawImage(background, 0, 0, pixelWidthPanel, pixelHeightPanel, this);
         
         //  this for loops goes through the incoming Array, cell by cell, and paints each with the imported images

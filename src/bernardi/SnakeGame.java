@@ -248,17 +248,18 @@ public class SnakeGame
             userInputSnakeDirection = 'R';
         
             List <SnakeParts> currentSnake = createSnakeArray();
+            List <SnakeParts> newSnake;
             Fruit fruit = generateNewFruit(currentSnake);
             updateRect(currentSnake, fruit,userInputSnakeDirection);
             
             // main game loop
             while(1==1)
             {
-                pause(115);
+                pause(105);
                 
                 // new snake is the snake that is moved depending upon the direction
                 // this newSnake is compared against currentSnake to check for collision with itself or fruit
-                List <SnakeParts> newSnake = moveSnake(currentSnake, userInputSnakeDirection);
+                newSnake = moveSnake(currentSnake, userInputSnakeDirection);
 
                 if((checkIfSnakeCollides(currentSnake, newSnake)) == false)
                 {
@@ -268,24 +269,20 @@ public class SnakeGame
                         // plays the eating sounds
                         sounds.soundEating();
                         
-                        if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 1)
-                        {
-                            score += 100;
-                        }
-                        
-                        else if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 2)
-                        {
-                            score += 200;
-                        }
-                        
-                        else if(fruit.ORDER == (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 3)
-                        {
-                            score += 300;
-                        }
-                        
-                        else
-                        {
-                            score += 500;
+                        // adds to score depending on which fruit was eaten
+                        switch (fruit.ORDER) {
+                            case (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 1:
+                                score += 100;
+                                break;
+                            case (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 2:
+                                score += 200;
+                                break;
+                            case (NUMBEROFCOLUMNSANDROWS * NUMBEROFCOLUMNSANDROWS) + 3:
+                                score += 300;
+                                break;
+                            default:
+                                score += 500;
+                                break;
                         }
                         
                         
@@ -307,6 +304,7 @@ public class SnakeGame
                     else
                     {
                         updateRect(newSnake, fruit,userInputSnakeDirection);
+                        currentSnake = newSnake;
                     }
 
 
