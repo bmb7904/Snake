@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 public class SnakeGame 
@@ -178,8 +179,15 @@ public class SnakeGame
         System.out.println(PIXELHEIGHT);
         
 
-
-            createJframe();
+        SwingUtilities.invokeLater(new Runnable() 
+        {
+            public void run()
+            {
+                createJframe();
+            }
+        });
+    
+            
             KeyListener l;
             l = new KeyListener() {
                 @Override

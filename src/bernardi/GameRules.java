@@ -145,18 +145,6 @@ public class GameRules
             return collision;
         }
         
-        // pauses the program for the number of milliseconds in the parameter
-        public static void pause(int ms) 
-        {
-        try 
-        {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) 
-        {
-            System.err.format("IOException: %s%n", e);
-        }
-        }
-        
         public List <SnakeParts> addNewBodyPart(List <SnakeParts> incomingSnake, SnakeParts tail)
         {
             incomingSnake.add(incomingSnake.size(), tail);
